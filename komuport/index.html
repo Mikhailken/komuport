@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <!-- Wajib supaya tampilan pas di HP -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komuport - Website Pelaporan Warga Martinez</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Komuport</h1>
+    <p>Website Pelaporan untuk Warga Martinez</p>
+
+    <!-- Kotak status ini hanya untuk tes setup hari ini.
+         Nanti diganti dengan halaman awal sesuai desain Figma. -->
+    <div id="status-firebase" class="status">Mengecek koneksi ke Firebase...</div>
+  </main>
+
+  <script type="module">
+    import { db } from "./js/firebase-config.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+    const kotak = document.getElementById("status-firebase");
+
+    // Coba membaca satu dokumen. Karena belum login, Security Rules akan MENOLAK.
+    // Kalau yang muncul "permission-denied", artinya:
+    //   (1) website sudah tersambung ke project Firebase yang benar, dan
+    //   (2) aturan keamanan sudah aktif.
+    // Itu hasil yang kita mau.
+    try {
+      await getDoc(doc(db, "tes", "ping"));
+      kotak.textContent = "Terhubung ke Firebase, TAPI database masih terbuka untuk umum. Pasang firestore.rules!";
+      kotak.classList.add("peringatan");
+    } catch (err) {
+      if (err.code === "permission-denied") {
+        kotak.textContent = "Terhubung ke Firebase ✓ — aturan keamanan aktif.";
+        kotak.classList.add("berhasil");
+      } else {
+        kotak.textContent = "Gagal terhubung: " + err.message + " (cek isi firebase-config.js)";
+        kotak.classList.add("gagal");
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

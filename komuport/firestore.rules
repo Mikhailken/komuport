@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// =====================================================================
+// Komuport - Firestore Security Rules
+// Salin SELURUH isi file ini ke: Firebase Console > Firestore Database > Rules
+// lalu klik Publish.
+//
+// Ringkasan aturan:
+// - Warga baru daftar -> dokumen users dibuat dengan status "menunggu".
+// - Hanya akun berstatus "aktif" (sudah diverifikasi admin) yang bisa
+//   melihat/membuat laporan dan komentar.
+// - Hanya admin yang bisa memverifikasi akun, mengubah status laporan,
+//   dan menghapus laporan/komentar.
+// - Akun admin dibuat manual (tidak bisa lewat halaman Register).
+// =====================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function sudahLogin() {
+      return request.auth != null;
+    }
+    function dataSaya() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    function punyaProfil() {
+      return sudahLogin() && exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    function isAdmin() {
+      return punyaProfil() && dataSaya().role == 'admin';
+    }
+    function isAktif() {
+      return punyaProfil() && dataSaya().status == 'aktif';
+    }
+
+    // ---------- Data akun ----------
+    match /users/{uid} {
+      // Pemilik akun boleh lihat datanya sendiri; admin boleh lihat semua
+      allow read: if sudahLogin() && (request.auth.uid == uid || isAdmin());
+
+      // Saat register: hanya boleh membuat profil sendiri,
+      // dan tidak boleh menjadikan diri admin / langsung aktif
+      allow create: if sudahLogin()
+        && request.auth.uid == uid
+        && request.resource.data.role == 'warga'
+        && request.resource.data.status == 'menunggu';
+
+      // Verifikasi (ubah status) dan hapus akun: hanya admin
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- Laporan ----------
+    match /laporan/{laporanId} {
+      allow read: if isAktif();
+
+      // Warga aktif boleh membuat laporan atas namanya sendiri,
+      // dan status awal wajib "Dilaporkan"
+      allow create: if isAktif()
+        && request.resource.data.pelaporUid == request.auth.uid
+        && request.resource.data.status == 'Dilaporkan';
+
+      // Ubah status & hapus laporan: hanya admin
+      allow update, delete: if isAdmin();
+
+      // ---------- Komentar (sub-koleksi di dalam laporan) ----------
+      match /komentar/{komentarId} {
+        allow read: if isAktif();
+        allow create: if isAktif()
+          && request.resource.data.penulisUid == request.auth.uid;
+        allow delete: if isAdmin();
+      }
+    }
+  }
+}
