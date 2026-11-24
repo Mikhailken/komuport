@@ -1,25 +1,37 @@
-/* =========================================================
-   Komuport - style dasar (mobile-first)
-   Tulis gaya untuk HP dulu, lalu tambahkan @media untuk layar lebar.
-   ========================================================= */
+/* =====================================================================
+   KomuReport - style.css (frontend)
+   Mobile-first: gaya HP ditulis dulu, lalu @media untuk laptop.
+   ===================================================================== */
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ---------- 1. Font & warna (diambil dari desain Figma) ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+:root {
+  --biru-utama: #3a7fa8;     /* tombol, link, tulisan "Report" */
+  --biru-muda: #a7cbf6;      /* panel kiri halaman login */
+  --abu-panel: #e4e4e4;      /* panel kanan form */
+  --abu-latar: #f4f4f4;      /* panel kiri halaman register */
+  --garis: #c9c9c9;          /* garis kotak isian */
+  --teks: #1f1f1f;
+  --teks-pudar: #6b6b6b;
+  --putih: #ffffff;
+  --radius: 4px;
+  --font: "Source Serif 4", Georgia, "Times New Roman", serif;
 }
+
+/* ---------- 2. Dasar ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font);
+  color: var(--teks);
+  background: var(--putih);
   line-height: 1.5;
-  color: #1f2933;
-  background: #f5f7fa;
 }
 
-img {
-  max-width: 100%; /* gambar tidak pernah melebihi layar */
-  height: auto;
-}
+img { max-width: 100%; height: auto; }
+a { color: var(--biru-utama); text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
 
 .container {
   width: 100%;
@@ -27,45 +39,108 @@ img {
   margin: 0 auto;
   padding: 24px 16px;
 }
-
-h1 {
-  font-size: 1.75rem;
-  margin-bottom: 4px;
+/* ---------- 3. Logo / brand ---------- */
+.brand-nama { font-weight: 700; font-size: 1.1rem; }
+.brand-nama span { color: var(--biru-utama); }
+.brand-tagline {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teks-pudar);
 }
 
-.status {
-  margin-top: 24px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  background: #e4e7eb;
-}
-.status.berhasil   { background: #d1fadf; color: #05603a; }
-.status.peringatan { background: #fef0c7; color: #93370d; }
-.status.gagal      { background: #fee4e2; color: #b42318; }
-
-/* Layar tablet/laptop ke atas */
-@media (min-width: 768px) {
-  .container { padding: 40px 24px; }
-  h1 { font-size: 2.25rem; }
-}
-
-/* ---------- Tombol (sementara, nanti disesuaikan dengan Figma) ---------- */
-.tombol-awal {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
+/* ---------- 4. Tombol ---------- */
 .tombol {
   display: inline-block;
   padding: 10px 20px;
-  border-radius: 8px;
-  background: #1f6feb;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  border: 2px solid #1f6feb;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--biru-utama);
+  color: var(--putih);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
 }
-.tombol-garis {
-  background: transparent;
-  color: #1f6feb;
+.tombol:hover { filter: brightness(0.92); text-decoration: none; }
+.tombol-penuh { width: 100%; }
+.tombol-garis { background: transparent; color: var(--biru-utama); border: 2px solid var(--biru-utama); }
+
+/* ---------- 5. Halaman awal (index.html) ---------- */
+.tombol-awal { display: flex; gap: 12px; margin-top: 24px; }
+/* ---------- 6. Halaman Login & Register ---------- */
+.halaman-auth {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;          /* HP: panel bertumpuk atas-bawah */
+}
+
+/* Panel kiri: sambutan */
+.auth-sambutan {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 20px;
+}
+.auth-sambutan--biru { background: var(--biru-muda); }
+.auth-sambutan--abu  { background: var(--abu-latar); }
+
+.auth-judul h1 { font-size: 1.8rem; line-height: 1.15; }
+.auth-judul p  { color: var(--teks-pudar); margin-top: 8px; }
+.auth-footer   { display: none; font-size: 0.75rem; color: var(--teks-pudar); }
+
+/* Panel kanan: area form */
+.auth-form-area {
+  flex: 1;
+  background: var(--abu-panel);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+}
+
+.auth-form { width: 100%; max-width: 330px; }
+.auth-form h2 { font-size: 1.3rem; margin-bottom: 16px; }
+
+.auth-form label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  background: var(--putih);
+  font-family: var(--font);
+  font-size: 0.9rem;
+}
+.auth-form input:focus { outline: 2px solid var(--biru-utama); border-color: var(--biru-utama); }
+
+/* Dua kolom (dipakai di halaman Register) */
+.form-baris {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.auth-form .tombol { margin-top: 24px; }
+.auth-pindah { margin-top: 16px; font-size: 0.8rem; color: var(--teks-pudar); }
+/* ---------- 7. Laptop / layar lebar ---------- */
+@media (min-width: 768px) {
+  .halaman-auth { flex-direction: row; }        /* panel kiri-kanan */
+
+  .auth-sambutan {
+    width: 50%;
+    justify-content: space-between;             /* brand atas, judul tengah, footer bawah */
+    padding: 56px 60px;
+  }
+  .auth-judul h1 { font-size: 2.6rem; max-width: 360px; }
+  .auth-footer   { display: block; }
+
+  .auth-form-area { width: 50%; }
 }
