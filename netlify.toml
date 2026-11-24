@@ -1,0 +1,9 @@
+# =====================================================================
+# Pengaturan Netlify untuk Komuport
+# - Website (frontend) diambil dari folder "frontend"
+# - Fungsi Node.js (backend, untuk email otomatis) ada di folder
+#   "backend/netlify/functions"
+# =====================================================================
+[build]
+  publish = "frontend"
+  functions = "backend/netlify/functions"

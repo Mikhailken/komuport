@@ -2,60 +2,64 @@
 
 Website Pelaporan untuk Warga Martinez — proyek skripsi Mikhail Keene Grady (Universitas Pelita Harapan).
 
-Warga dapat melaporkan kejadian di lingkungan (barang/hewan hilang atau ditemukan, kerusakan fasilitas,
-kebersihan, keamanan, kendaraan mencurigakan) beserta foto, menambahkan komentar, dan memantau status laporan.
-Admin/Satpam memverifikasi akun warga, memperbarui status laporan, dan menghapus konten yang tidak sesuai.
+## Pembagian frontend dan backend
 
-## Teknologi
-- HTML, CSS, JavaScript
-- Firebase Authentication (email & password)
-- Cloud Firestore (database)
-- Netlify (hosting), GitHub (version control)
-
-## Struktur folder
 ```
 komuport/
-├── index.html            halaman awal
-├── css/style.css         style dasar (mobile-first)
-├── js/firebase-config.js koneksi ke Firebase
-└── firestore.rules       aturan keamanan database (salinan dari Firebase Console)
+├── frontend/                  ← FRONTEND: semua yang dijalankan di browser pengguna
+│   ├── index.html             halaman awal
+│   ├── tes-koneksi.html       halaman tes koneksi ke backend
+│   ├── css/style.css          tampilan (warna, ukuran, tata letak)
+│   └── js/
+│       ├── ui/                interaksi tampilan saja (tanpa Firebase)
+│       └── services/          penghubung frontend ke backend (Firebase)
+│
+├── backend/                   ← BACKEND: aturan dan logika di sisi server
+│   ├── firestore.rules        aturan keamanan database (dipasang di Firebase Console)
+│   └── netlify/functions/     kode Node.js untuk email otomatis
+│
+└── netlify.toml               pengaturan Netlify (folder website & folder fungsi)
 ```
+
+| Lapisan | Teknologi | Berjalan di |
+|---|---|---|
+| Frontend | HTML, CSS, JavaScript | Browser pengguna (dihosting Netlify) |
+| Penghubung | Firebase JavaScript SDK (`js/services/`) | Browser pengguna |
+| Backend | Firebase Authentication, Cloud Firestore + Security Rules | Server Google (Firebase) |
+| Backend | Node.js (Netlify Functions) | Server Netlify |
 
 ## Struktur database (Cloud Firestore)
 
 ### Koleksi `users` — ID dokumen = UID dari Firebase Authentication
-| Field        | Tipe      | Contoh / keterangan                      |
-|--------------|-----------|------------------------------------------|
-| nama         | string    | "Budi Santoso"                           |
-| email        | string    | "budi@gmail.com"                         |
-| blok         | string    | "C"                                      |
-| noRumah      | string    | "12"                                     |
-| role         | string    | "warga" atau "admin"                     |
-| status       | string    | "menunggu", "aktif", atau "ditolak"      |
-| dibuatPada   | timestamp | waktu daftar                             |
+| Field | Tipe | Keterangan |
+|---|---|---|
+| nama | string | nama lengkap |
+| email | string | email akun |
+| blok | string | contoh "C" |
+| noRumah | string | contoh "12" |
+| role | string | "warga" atau "admin" |
+| status | string | "menunggu", "aktif", atau "ditolak" |
+| dibuatPada | timestamp | waktu daftar |
 
 ### Koleksi `laporan` — ID dokumen otomatis
-| Field          | Tipe      | Contoh / keterangan                                       |
-|----------------|-----------|-----------------------------------------------------------|
-| judul          | string    | "Kucing oranye hilang"                                    |
-| deskripsi      | string    | detail kejadian                                           |
-| kategori       | string    | salah satu dari daftar kategori di bawah                  |
-| area           | string    | "Blok C"                                                  |
-| foto           | string    | foto yang sudah dikompres (format data URL), boleh kosong |
-| status         | string    | "Dilaporkan", "Diproses", atau "Selesai"                  |
-| pelaporUid     | string    | UID pembuat laporan                                       |
-| pelaporNama    | string    | disalin dari users supaya cepat ditampilkan               |
-| pelaporRumah   | string    | "C-12"                                                    |
-| dibuatPada     | timestamp | waktu laporan dibuat                                      |
-| diperbaruiPada | timestamp | waktu status terakhir diubah                              |
-
-Kategori: Barang Hilang, Barang Ditemukan, Hewan Hilang, Hewan Ditemukan, Kerusakan Fasilitas,
-Kebersihan, Keamanan, Kendaraan Mencurigakan.
+| Field | Tipe | Keterangan |
+|---|---|---|
+| judul | string | judul laporan |
+| deskripsi | string | detail kejadian |
+| kategori | string | Barang Hilang, Barang Ditemukan, Hewan Hilang, Hewan Ditemukan, Kerusakan Fasilitas, Kebersihan, Keamanan, Kendaraan Mencurigakan |
+| area | string | contoh "Blok C" |
+| foto | string | foto terkompresi (data URL), boleh kosong |
+| status | string | "Dilaporkan", "Diproses", atau "Selesai" |
+| pelaporUid | string | UID pembuat laporan |
+| pelaporNama | string | disalin dari users |
+| pelaporRumah | string | contoh "C-12" |
+| dibuatPada | timestamp | waktu laporan dibuat |
+| diperbaruiPada | timestamp | waktu status terakhir diubah |
 
 ### Sub-koleksi `laporan/{idLaporan}/komentar`
-| Field       | Tipe      | Keterangan                 |
-|-------------|-----------|----------------------------|
-| isi         | string    | isi komentar               |
-| penulisUid  | string    | UID penulis                |
-| penulisNama | string    | nama penulis               |
-| dibuatPada  | timestamp | waktu komentar dibuat      |
+| Field | Tipe | Keterangan |
+|---|---|---|
+| isi | string | isi komentar |
+| penulisUid | string | UID penulis |
+| penulisNama | string | nama penulis |
+| dibuatPada | timestamp | waktu komentar dibuat |
