@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - KomuReport</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="halaman-auth">
+
+  <!-- ===== PANEL KIRI: sambutan ===== -->
+  <section class="auth-sambutan auth-sambutan--abu">
+    <div class="brand">
+      <p class="brand-nama">Komu<span>Report</span></p>
+      <p class="brand-tagline">Laporkan · Pantau · Selesaikan</p>
+    </div>
+
+    <div class="auth-judul">
+      <h1>Buat akun baru.</h1>
+      <p>Daftarkan akun untuk bergabung dengan komunitas.</p>
+    </div>
+
+    <p class="auth-footer">Komunitas Warga</p>
+  </section>
+
+  <!-- ===== PANEL KANAN: form register ===== -->
+  <section class="auth-form-area">
+    <form class="auth-form" id="form-register">
+      <h2>Register</h2>
+
+      <label for="nama">Nama Lengkap</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <!-- Dua kolom: blok + nomor rumah -->
+      <div class="form-baris">
+        <div>
+          <label for="blok">Blok (mis. Utara 1)</label>
+          <input type="text" id="blok" name="blok" required>
+        </div>
+        <div>
+          <label for="noRumah">No. Rumah</label>
+          <input type="text" id="noRumah" name="noRumah" required>
+        </div>
+      </div>
+
+      <!-- Dua kolom: password + konfirmasi -->
+      <div class="form-baris">
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" minlength="6" required>
+        </div>
+        <div>
+          <label for="konfirmasi">Konfirmasi Password</label>
+          <input type="password" id="konfirmasi" name="konfirmasi" minlength="6" required>
+        </div>
+      </div>
+
+      <button type="submit" class="tombol tombol-penuh">Register</button>
+
+      <p class="auth-pindah">Sudah punya akun? <a href="login.html">Login</a></p>
+    </form>
+  </section>
+
+</body>
+</html>
