@@ -399,3 +399,54 @@ a:hover { text-decoration: underline; }
   .detail { grid-template-columns: 1.1fr 1fr; gap: 40px; }
   .detail-utama h1 { font-size: 2.2rem; }
 }
+/* =====================================================================
+   BAGIAN 8 - HALAMAN DASHBOARD ADMIN
+   ===================================================================== */
+
+/* ---------- 20. Kotak statistik ---------- */
+.statistik {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 3 kotak sejajar, juga di HP */
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto 28px;
+}
+.statistik-kotak {
+  background: var(--biru-utama);
+  color: var(--putih);
+  border-radius: var(--radius);
+  padding: 14px 8px;
+  text-align: center;
+}
+.statistik-angka { font-size: 1.4rem; font-weight: 700; line-height: 1.1; }
+.statistik-label { font-size: 0.7rem; }
+
+/* ---------- 21. Kotak pencarian ---------- */
+.kotak-cari {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 340px;
+  padding: 4px 10px;
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+.ikon-cari { font-size: 1.1rem; color: var(--teks); }
+.kotak-cari input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 4px 0;
+  background: transparent;
+}
+.kotak-cari:focus-within { border-color: var(--biru-utama); }
+
+/* ---------- 22. Laptop ---------- */
+@media (min-width: 768px) {
+  .statistik { max-width: 520px; gap: 24px; }
+  .statistik-kotak { padding: 16px; }
+}
