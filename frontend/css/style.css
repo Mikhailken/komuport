@@ -450,3 +450,42 @@ a:hover { text-decoration: underline; }
   .statistik { max-width: 520px; gap: 24px; }
   .statistik-kotak { padding: 16px; }
 }
+/* =====================================================================
+   BAGIAN 9 - TAMBAHAN KHUSUS ADMIN (detail laporan)
+   ===================================================================== */
+
+/* ---------- 23. Pilihan status (badge yang bisa diklik) ---------- */
+.pilihan-status { display: flex; flex-wrap: wrap; gap: 8px; }
+.pilihan-status .badge {
+  border: none;
+  font-family: var(--font);
+  cursor: pointer;
+}
+.pilihan-status .badge:hover { filter: brightness(0.93); }
+.petunjuk { font-size: 0.65rem; font-style: italic; color: var(--teks-pudar); margin-top: 6px; }
+
+/* ---------- 24. Tombol hapus (laporan & komentar) ---------- */
+.tombol-hapus {
+  margin-top: 16px;
+  padding: 8px 16px;
+  border: 1px solid #c94a4a;
+  border-radius: var(--radius);
+  background: var(--putih);
+  color: #c94a4a;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tombol-hapus:hover { background: #fbeaea; }
+
+.komentar-atas { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hapus-komentar {
+  background: none;
+  border: none;
+  color: #c94a4a;
+  font-family: var(--font);
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+.hapus-komentar:hover { text-decoration: underline; }
