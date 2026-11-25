@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - KomuReport</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER NAVIGASI ===== -->
+  <header class="header">
+    <div class="header-isi">
+      <a href="dashboarduser.html" class="brand-nama">Komu<span>Report</span></a>
+      <nav class="nav">
+        <a href="dashboarduser.html">Dashboard</a>
+        <a href="buat-laporan.html">Buat Laporan</a>
+        <a href="profil.html" class="aktif">Profil</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="judul-halaman">
+      <div>
+        <h1>Profil</h1>
+        <p class="subjudul">Data akun dan laporan yang pernah kamu buat</p>
+      </div>
+    </div>
+
+    <!-- ===== DATA AKUN (contoh statis, nanti dari koleksi "users") ===== -->
+    <section class="profil-kartu">
+      <div class="profil-baris">
+        <p class="info-label">Nama Lengkap</p>
+        <p>Andi Pratama</p>
+      </div>
+      <div class="profil-baris">
+        <p class="info-label">Email</p>
+        <p>andi.pratama@gmail.com</p>
+      </div>
+      <div class="profil-baris">
+        <p class="info-label">Blok / No. Rumah</p>
+        <p>Utara 1 No. 12</p>
+      </div>
+      <div class="profil-baris">
+        <p class="info-label">Status Akun</p>
+        <span class="badge badge-aktif">Aktif</span>
+      </div>
+      <div class="profil-baris">
+        <p class="info-label">Terdaftar Sejak</p>
+        <p>20 November 2026</p>
+      </div>
+    </section>
+
+    <!-- ===== LAPORAN SAYA (contoh statis) ===== -->
+    <h2 class="judul-bagian">Laporan Saya</h2>
+    <section class="grid-laporan">
+
+      <article class="kartu">
+        <div class="kartu-foto"></div>
+        <div class="kartu-isi">
+          <p class="kartu-tanggal">1 November 2026</p>
+          <h3>Anjing Hilang</h3>
+          <p class="kartu-lokasi">Lokasi: Blok A</p>
+          <div class="kartu-bawah">
+            <span class="badge badge-belum">Belum Selesai</span>
+            <a href="detail-laporan-user.html">Lihat Detail →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="kartu">
+        <div class="kartu-foto"></div>
+        <div class="kartu-isi">
+          <p class="kartu-tanggal">4 November 2026</p>
+          <h3>Lampu Jalan Mati</h3>
+          <p class="kartu-lokasi">Lokasi: Blok C</p>
+          <div class="kartu-bawah">
+            <span class="badge badge-selesai">Selesai</span>
+            <a href="detail-laporan-user.html">Lihat Detail →</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>
