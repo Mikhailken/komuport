@@ -144,3 +144,121 @@ a:hover { text-decoration: underline; }
 
   .auth-form-area { width: 50%; }
 }
+/* =====================================================================
+   BAGIAN 5 - HALAMAN DASHBOARD & HALAMAN SETELAH LOGIN
+   ===================================================================== */
+
+/* ---------- 8. Header navigasi ---------- */
+.header { border-bottom: 1px solid #eeeeee; background: var(--putih); }
+.header-isi {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;                 /* HP: menu boleh turun ke baris kedua */
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.header .brand-nama { color: var(--teks); text-decoration: none; }
+.nav { display: flex; gap: 20px; }
+.nav a {
+  color: var(--teks);
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { text-decoration: none; border-bottom-color: var(--garis); }
+.nav a.aktif { font-weight: 600; border-bottom-color: var(--biru-utama); }
+
+/* ---------- 9. Judul halaman ---------- */
+.judul-halaman {
+  display: flex;
+  flex-direction: column;          /* HP: judul di atas, filter di bawah */
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.judul-halaman h1 { font-size: 2rem; line-height: 1.2; }
+.subjudul { font-style: italic; color: var(--teks-pudar); font-size: 0.9rem; }
+
+.aksi-halaman { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+
+/* Filter Semua / Belum Selesai / Selesai */
+.filter { display: flex; gap: 16px; }
+.filter-item {
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: 0.85rem;
+  color: var(--teks-pudar);
+  cursor: pointer;
+  padding: 0;
+}
+.filter-item.aktif { color: var(--teks); font-weight: 600; }
+
+/* ---------- 10. Kartu laporan ---------- */
+.grid-laporan {
+  display: grid;
+  grid-template-columns: 1fr;      /* HP: 1 kartu per baris */
+  gap: 20px;
+}
+
+.kartu {
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--putih);
+}
+
+/* Tempat foto. Sementara diisi gambar pemandangan sederhana
+   (pengganti foto). Nanti diganti foto asli dari laporan. */
+.kartu-foto {
+  height: 140px;
+  background: linear-gradient(to bottom,
+    #d6e9f7 0%, #d6e9f7 55%,
+    #c8dd8f 55%, #c8dd8f 72%,
+    #8fa236 72%, #8fa236 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.kartu-isi { padding: 12px 14px 14px; }
+.kartu-tanggal { font-size: 0.7rem; color: var(--teks-pudar); }
+.kartu h3 { font-size: 1rem; margin: 4px 0; }
+.kartu-lokasi { font-size: 0.75rem; color: var(--teks-pudar); }
+.kartu-bawah {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 0.75rem;
+}
+
+/* ---------- 11. Badge status ---------- */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+.badge-belum   { background: #fbdcdc; color: #a33a3a; }   /* Belum Selesai */
+.badge-proses  { background: #fdeccb; color: #93611a; }   /* Diproses */
+.badge-selesai { background: #d6e7fb; color: #2d5f8f; }   /* Selesai */
+
+/* ---------- 12. Laptop / layar lebar (halaman setelah login) ---------- */
+@media (min-width: 768px) {
+  .header-isi { padding: 20px 24px; }
+  .judul-halaman {
+    flex-direction: row;           /* judul kiri, filter + tombol kanan */
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .judul-halaman h1 { font-size: 2.2rem; }
+  .grid-laporan { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-laporan { grid-template-columns: repeat(4, 1fr); }   /* 4 kartu seperti Figma */
+}
