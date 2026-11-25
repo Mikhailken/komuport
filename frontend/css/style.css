@@ -538,3 +538,31 @@ a:hover { text-decoration: underline; }
     padding: 16px 20px;
   }
 }
+/* =====================================================================
+   BAGIAN 11 - HALAMAN PROFIL (warga)
+   ===================================================================== */
+
+/* ---------- 28. Kartu data akun ---------- */
+.profil-kartu {
+  display: grid;
+  grid-template-columns: 1fr;      /* HP: satu kolom */
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background: var(--putih);
+  margin-bottom: 32px;
+}
+.profil-baris p:not(.info-label) { font-size: 0.95rem; }
+
+/* Badge status akun */
+.badge-aktif    { background: #d9f2e3; color: #23764a; }   /* Aktif */
+.badge-menunggu { background: #fdeccb; color: #93611a; }   /* Menunggu verifikasi */
+
+/* ---------- 29. Judul bagian "Laporan Saya" ---------- */
+.judul-bagian { font-size: 1.3rem; margin-bottom: 16px; }
+
+/* ---------- 30. Laptop: data akun 3 kolom ---------- */
+@media (min-width: 768px) {
+  .profil-kartu { grid-template-columns: repeat(3, 1fr); padding: 24px 28px; }
+}
