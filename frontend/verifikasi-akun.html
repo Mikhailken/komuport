@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Akun - KomuReport</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER NAVIGASI ADMIN ===== -->
+  <header class="header">
+    <div class="header-isi">
+      <a href="dashboardadmin.html" class="brand-nama">Komu<span>Report</span></a>
+      <nav class="nav">
+        <a href="dashboardadmin.html">Dashboard</a>
+        <a href="verifikasi-akun.html" class="aktif">Verifikasi Akun</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="judul-halaman">
+      <div>
+        <h1>Verifikasi Akun</h1>
+        <p class="subjudul">Periksa data warga baru, lalu setujui atau tolak pendaftarannya</p>
+      </div>
+      <p class="jumlah-menunggu"><strong>3</strong> akun menunggu verifikasi</p>
+    </div>
+
+    <!-- ===== DAFTAR AKUN MENUNGGU (contoh statis) =====
+         Nanti diisi otomatis dari koleksi "users" di Firestore
+         yang statusnya "menunggu". -->
+    <section class="daftar-akun">
+
+      <article class="akun-item">
+        <div class="akun-data">
+          <h3>Budi Santoso</h3>
+          <p>budi.santoso@gmail.com</p>
+          <p class="akun-rumah">Utara 2 No. 5 · Daftar 24 November 2026</p>
+        </div>
+        <div class="akun-aksi">
+          <button type="button" class="tombol">Setujui</button>
+          <button type="button" class="tombol-tolak">Tolak</button>
+        </div>
+      </article>
+
+      <article class="akun-item">
+        <div class="akun-data">
+          <h3>Siti Rahma</h3>
+          <p>siti.rahma@gmail.com</p>
+          <p class="akun-rumah">Selatan 1 No. 8 · Daftar 24 November 2026</p>
+        </div>
+        <div class="akun-aksi">
+          <button type="button" class="tombol">Setujui</button>
+          <button type="button" class="tombol-tolak">Tolak</button>
+        </div>
+      </article>
+
+      <article class="akun-item">
+        <div class="akun-data">
+          <h3>Kevin Wijaya</h3>
+          <p>kevin.w@gmail.com</p>
+          <p class="akun-rumah">Utara 1 No. 3 · Daftar 25 November 2026</p>
+        </div>
+        <div class="akun-aksi">
+          <button type="button" class="tombol">Setujui</button>
+          <button type="button" class="tombol-tolak">Tolak</button>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>
