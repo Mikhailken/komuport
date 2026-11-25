@@ -489,3 +489,52 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 .hapus-komentar:hover { text-decoration: underline; }
+/* =====================================================================
+   BAGIAN 10 - HALAMAN VERIFIKASI AKUN (admin)
+   ===================================================================== */
+
+/* ---------- 25. Jumlah akun menunggu ---------- */
+.jumlah-menunggu { font-size: 0.85rem; color: var(--teks-pudar); }
+.jumlah-menunggu strong { color: var(--biru-utama); font-size: 1.1rem; }
+
+/* ---------- 26. Daftar akun ---------- */
+.daftar-akun { display: flex; flex-direction: column; gap: 12px; }
+
+.akun-item {
+  display: flex;
+  flex-direction: column;          /* HP: data di atas, tombol di bawah */
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background: var(--putih);
+}
+.akun-data h3 { font-size: 1rem; }
+.akun-data p { font-size: 0.85rem; }
+.akun-rumah { color: var(--teks-pudar); font-size: 0.75rem !important; margin-top: 2px; }
+
+.akun-aksi { display: flex; gap: 8px; }
+
+/* Tombol Tolak: garis merah, senada dengan tombol hapus */
+.tombol-tolak {
+  padding: 10px 20px;
+  border: 1px solid #c94a4a;
+  border-radius: var(--radius);
+  background: var(--putih);
+  color: #c94a4a;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tombol-tolak:hover { background: #fbeaea; }
+
+/* ---------- 27. Laptop: data kiri, tombol kanan ---------- */
+@media (min-width: 768px) {
+  .akun-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+  }
+}
