@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Laporan (Admin) - KomuReport</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER NAVIGASI ADMIN ===== -->
+  <header class="header">
+    <div class="header-isi">
+      <a href="dashboardadmin.html" class="brand-nama">Komu<span>Report</span></a>
+      <nav class="nav">
+        <a href="dashboardadmin.html" class="aktif">Dashboard</a>
+        <a href="verifikasi-akun.html">Verifikasi Akun</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <a href="dashboardadmin.html" class="link-kembali">← Kembali ke Dashboard</a>
+
+    <div class="detail">
+
+      <!-- ===== KOLOM KIRI: judul + foto ===== -->
+      <section class="detail-utama">
+        <h1>Anjing hilang</h1>
+        <p class="detail-meta">Tanggal 1 November 2026 · Pelapor: Andi · Utara 1 No. 12</p>
+        <div class="detail-foto"></div>
+        <button type="button" class="tombol-hapus" id="hapus-laporan">Hapus Laporan</button>
+      </section>
+
+      <!-- ===== KOLOM KANAN: informasi + kelola ===== -->
+      <aside class="detail-info">
+
+        <div class="info-blok">
+          <p class="info-label">Status</p>
+          <span class="badge badge-belum">Belum Selesai</span>
+        </div>
+
+        <!-- Khusus admin: tombol untuk mengubah status -->
+        <div class="info-blok">
+          <p class="info-label">Perbarui Status</p>
+          <div class="pilihan-status">
+            <button type="button" class="badge badge-belum" data-status="Belum Selesai">Belum Selesai</button>
+            <button type="button" class="badge badge-proses" data-status="Diproses">Diproses</button>
+            <button type="button" class="badge badge-selesai" data-status="Selesai">Selesai</button>
+          </div>
+          <p class="petunjuk">Klik status untuk mengubah</p>
+        </div>
+
+        <div class="info-blok">
+          <p class="info-label">Kategori</p>
+          <p>Hewan Hilang</p>
+        </div>
+
+        <div class="info-blok">
+          <p class="info-label">Blok / Area</p>
+          <p>Utara 1</p>
+        </div>
+
+        <div class="info-blok">
+          <p class="info-label">Deskripsi</p>
+          <p>Anjing peliharaan hilang di sekitar Blok A. Terakhir terlihat pada pagi hari.</p>
+        </div>
+
+        <div class="info-blok">
+          <p class="info-label">Komentar</p>
+
+          <!-- Komentar + tombol hapus (khusus admin) -->
+          <div class="komentar">
+            <div class="komentar-atas">
+              <p class="komentar-penulis">Budi · Utara 2 No. 5</p>
+              <button type="button" class="hapus-komentar">Hapus</button>
+            </div>
+            <p>Sepertinya saya melihat anjing ini di Blok B</p>
+          </div>
+          <div class="komentar">
+            <div class="komentar-atas">
+              <p class="komentar-penulis">Andi · Utara 1 No. 12</p>
+              <button type="button" class="hapus-komentar">Hapus</button>
+            </div>
+            <p>Saya akan coba bantu mencari.</p>
+          </div>
+
+          <form id="form-komentar" class="form-komentar">
+            <input type="text" id="isi-komentar" name="isi" placeholder="Tulis komentar..." required>
+            <button type="submit" class="tombol">Kirim Komentar</button>
+          </form>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+</body>
+</html>
