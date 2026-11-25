@@ -328,3 +328,74 @@ a:hover { text-decoration: underline; }
   .form-laporan { grid-template-columns: 1fr 1fr; }
   .form-kolom .kotak-upload { height: 220px; }
 }
+/* =====================================================================
+   BAGIAN 7 - HALAMAN DETAIL LAPORAN (user & admin)
+   ===================================================================== */
+
+/* ---------- 15. Link kembali ---------- */
+.link-kembali {
+  display: inline-block;
+  font-size: 0.75rem;
+  margin: 8px 0 16px;
+}
+
+/* ---------- 16. Tata letak detail ---------- */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr;      /* HP: foto di atas, info di bawah */
+  gap: 32px;
+}
+
+.detail-utama h1 { font-size: 2rem; line-height: 1.2; }
+.detail-meta { font-size: 0.75rem; color: var(--teks-pudar); margin: 6px 0 16px; }
+
+/* Foto laporan (sementara gambar pengganti, nanti foto asli) */
+.detail-foto {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(to bottom,
+    #d6e9f7 0%, #d6e9f7 55%,
+    #c8dd8f 55%, #c8dd8f 72%,
+    #8fa236 72%, #8fa236 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ---------- 17. Kolom informasi ---------- */
+.info-blok { margin-bottom: 20px; font-size: 0.9rem; }
+.info-label {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teks-pudar);
+  margin-bottom: 6px;
+}
+
+/* ---------- 18. Komentar ---------- */
+.komentar { margin-bottom: 10px; font-size: 0.85rem; }
+.komentar-penulis {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teks-pudar);
+}
+
+.form-komentar { margin-top: 12px; }
+.form-komentar input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+.form-komentar input:focus { outline: 2px solid var(--biru-utama); border-color: var(--biru-utama); }
+
+/* ---------- 19. Laptop: dua kolom ---------- */
+@media (min-width: 768px) {
+  .detail { grid-template-columns: 1.1fr 1fr; gap: 40px; }
+  .detail-utama h1 { font-size: 2.2rem; }
+}
