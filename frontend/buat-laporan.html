@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buat Laporan - KomuReport</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER NAVIGASI ===== -->
+  <header class="header">
+    <div class="header-isi">
+      <a href="dashboarduser.html" class="brand-nama">Komu<span>Report</span></a>
+      <nav class="nav">
+        <a href="dashboarduser.html">Dashboard</a>
+        <a href="buat-laporan.html" class="aktif">Buat Laporan</a>
+        <a href="profil.html">Profil</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="judul-halaman">
+      <h1>Buat Laporan</h1>
+    </div>
+
+    <form id="form-laporan" class="form-laporan">
+
+      <!-- ===== KOLOM KIRI: isian teks ===== -->
+      <div class="form-kolom">
+        <label for="judul">Judul Laporan</label>
+        <input type="text" id="judul" name="judul" required>
+
+        <label for="kategori">Kategori</label>
+        <select id="kategori" name="kategori" required>
+          <option value="">-- Pilih kategori --</option>
+          <option>Barang Hilang</option>
+          <option>Barang Ditemukan</option>
+          <option>Hewan Hilang</option>
+          <option>Hewan Ditemukan</option>
+          <option>Kerusakan Fasilitas</option>
+          <option>Kebersihan</option>
+          <option>Keamanan</option>
+          <option>Kendaraan Mencurigakan</option>
+        </select>
+
+        <label for="area">Blok / Area</label>
+        <input type="text" id="area" name="area" required>
+
+        <label for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" name="deskripsi" rows="5" required></textarea>
+      </div>
+
+      <!-- ===== KOLOM KANAN: foto ===== -->
+      <div class="form-kolom">
+        <label for="foto">Foto</label>
+        <!-- Kotak putus-putus ini adalah label untuk input file.
+             Kalau diklik, jendela pilih foto akan terbuka. -->
+        <label for="foto" class="kotak-upload">
+          <span>Klik untuk upload foto</span>
+          <small>JPG atau PNG, maks. 5 MB</small>
+        </label>
+        <input type="file" id="foto" name="foto" accept="image/png, image/jpeg" class="input-tersembunyi">
+      </div>
+
+      <!-- ===== TOMBOL ===== -->
+      <div class="form-tombol">
+        <button type="submit" class="tombol">Kirim Laporan</button>
+        <a href="dashboarduser.html" class="tombol-teks">Batal</a>
+      </div>
+
+    </form>
+  </main>
+
+</body>
+</html>
