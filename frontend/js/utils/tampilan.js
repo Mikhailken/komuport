@@ -24,3 +24,12 @@ export function buat(tag, kelas, teks) {
     if (status === "Diproses") return "badge-proses";
     return "badge-belum";
   }
+
+// Timestamp Firestore -> "27 Nov 2026, 15.48"
+export function formatWaktu(ts) {
+    if (!ts) return "Baru saja";
+    return ts.toDate().toLocaleString("id-ID", {
+      day: "numeric", month: "short", year: "numeric",
+      hour: "2-digit", minute: "2-digit"
+    });
+  }
