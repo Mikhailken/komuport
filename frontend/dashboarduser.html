@@ -16,7 +16,7 @@
         <a href="dashboarduser.html" class="aktif">Dashboard</a>
         <a href="buat-laporan.html">Buat Laporan</a>
         <a href="profil.html">Profil</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>  <!-- UBAH -->
       </nav>
     </div>
   </header>
@@ -30,74 +30,24 @@
         <p class="subjudul">Daftar laporan dari warga</p>
       </div>
       <div class="aksi-halaman">
+        <!-- UBAH: tiap tombol diberi data-filter, ditambah "Diproses" -->
         <div class="filter">
-          <button class="filter-item aktif">Semua</button>
-          <button class="filter-item">Belum Selesai</button>
-          <button class="filter-item">Selesai</button>
+          <button type="button" class="filter-item aktif" data-filter="Semua">Semua</button>
+          <button type="button" class="filter-item" data-filter="Belum Selesai">Belum Selesai</button>
+          <button type="button" class="filter-item" data-filter="Diproses">Diproses</button>
+          <button type="button" class="filter-item" data-filter="Selesai">Selesai</button>
         </div>
         <a href="buat-laporan.html" class="tombol">+ Buat Laporan</a>
       </div>
     </div>
 
-    <!-- Daftar kartu laporan.
-         Untuk sekarang isinya CONTOH (statis).
-         Nanti diganti otomatis dengan data dari Firestore. -->
-    <section class="grid-laporan">
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">1 November 2026</p>
-          <h3>Anjing Hilang</h3>
-          <p class="kartu-lokasi">Lokasi: Blok A</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporanuser.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">2 November 2026</p>
-          <h3>Mobil Parkir Liar</h3>
-          <p class="kartu-lokasi">Lokasi: Blok B</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporanuser.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">3 November 2026</p>
-          <h3>Kerusakan Jalan</h3>
-          <p class="kartu-lokasi">Lokasi: Blok C</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporanuser.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">4 November 2026</p>
-          <h3>Lampu Jalan Mati</h3>
-          <p class="kartu-lokasi">Lokasi: Blok C</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-selesai">Selesai</span>
-            <a href="detail-laporanuser.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
+    <!-- UBAH: diberi id; kartu diisi otomatis oleh js/ui/dashboard-user.js
+         dari koleksi "laporan" di Firestore secara real-time -->
+    <section class="grid-laporan" id="daftar-laporan">
+      <p class="kosong">Memuat laporan...</p>
     </section>
   </main>
 
+  <script type="module" src="js/ui/dashboard-user.js"></script>  <!-- BARU -->
 </body>
 </html>
