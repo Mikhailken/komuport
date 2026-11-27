@@ -3,7 +3,7 @@
 // =========================================
 import { db } from "./firebase-config.js";
 import {
-  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc
+  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, where
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
 // Simpan laporan baru dengan status awal "Belum Selesai"
@@ -37,5 +37,16 @@ export function pantauSemuaLaporan(callback) {
 export function pantauLaporan(id, callback) {
   return onSnapshot(doc(db, "laporan", id), (snap) => {
     callback(snap.exists() ? { id: snap.id, ...snap.data() } : null);
+  });
+}
+
+// Pantau laporan milik satu warga (untuk halaman Profil)
+export function pantauLaporanSaya(uid, callback) {
+  const q = query(collection(db, "laporan"), where("pelaporUid", "==", uid));
+  return onSnapshot(q, (snap) => {
+    const daftar = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    // Urutkan di browser (terbaru di atas)
+    daftar.sort((a, b) => (b.dibuatPada?.seconds || 0) - (a.dibuatPada?.seconds || 0));
+    callback(daftar);
   });
 }

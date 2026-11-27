@@ -33,3 +33,35 @@ export function formatWaktu(ts) {
       hour: "2-digit", minute: "2-digit"
     });
   }
+  
+// Kartu laporan (dipakai di Dashboard, Profil, dan Dashboard Admin)
+// halamanDetail: "detail-laporanuser.html" atau "detail-laporan-admin.html"
+export function buatKartuLaporan(lap, halamanDetail) {
+    const kartu = buat("article", "kartu");
+  
+    const foto = buat("div", "kartu-foto");
+    if (lap.foto) {
+      const img = buat("img");
+      img.src = lap.foto;
+      img.alt = lap.judul;
+      img.loading = "lazy";
+      foto.append(img);
+    }
+  
+    const link = buat("a", "", "Lihat Detail →");
+    link.href = `${halamanDetail}?id=${lap.id}`;
+  
+    const bawah = buat("div", "kartu-bawah");
+    bawah.append(buat("span", "badge " + kelasBadge(lap.status), lap.status), link);
+  
+    const isi = buat("div", "kartu-isi");
+    isi.append(
+      buat("p", "kartu-tanggal", formatTanggal(lap.dibuatPada)),
+      buat("h3", "", lap.judul),
+      buat("p", "kartu-lokasi", "Lokasi: " + lap.area),
+      bawah
+    );
+  
+    kartu.append(foto, isi);
+    return kartu;
+  }
