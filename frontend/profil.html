@@ -16,7 +16,7 @@
         <a href="dashboarduser.html">Dashboard</a>
         <a href="buat-laporan.html">Buat Laporan</a>
         <a href="profil.html" class="aktif">Profil</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>  <!-- UBAH -->
       </nav>
     </div>
   </header>
@@ -30,19 +30,19 @@
       </div>
     </div>
 
-    <!-- ===== DATA AKUN (contoh statis, nanti dari koleksi "users") ===== -->
+    <!-- ===== DATA AKUN: diisi dari koleksi "users" oleh js/ui/profil.js ===== -->
     <section class="profil-kartu">
       <div class="profil-baris">
         <p class="info-label">Nama Lengkap</p>
-        <p>Andi Pratama</p>
+        <p id="profil-nama">-</p>                                  <!-- UBAH -->
       </div>
       <div class="profil-baris">
         <p class="info-label">Email</p>
-        <p>andi.pratama@gmail.com</p>
+        <p id="profil-email">-</p>                                 <!-- UBAH -->
       </div>
       <div class="profil-baris">
         <p class="info-label">Blok / No. Rumah</p>
-        <p>Utara 1 No. 12</p>
+        <p id="profil-rumah">-</p>                                 <!-- UBAH -->
       </div>
       <div class="profil-baris">
         <p class="info-label">Status Akun</p>
@@ -50,42 +50,17 @@
       </div>
       <div class="profil-baris">
         <p class="info-label">Terdaftar Sejak</p>
-        <p>20 November 2026</p>
+        <p id="profil-terdaftar">-</p>                             <!-- UBAH -->
       </div>
     </section>
 
-    <!-- ===== LAPORAN SAYA (contoh statis) ===== -->
-    <h2 class="judul-bagian">Laporan Saya</h2>
-    <section class="grid-laporan">
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">1 November 2026</p>
-          <h3>Anjing Hilang</h3>
-          <p class="kartu-lokasi">Lokasi: Blok A</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporan-user.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">4 November 2026</p>
-          <h3>Lampu Jalan Mati</h3>
-          <p class="kartu-lokasi">Lokasi: Blok C</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-selesai">Selesai</span>
-            <a href="detail-laporan-user.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
+    <!-- ===== LAPORAN SAYA: real-time, hanya laporan milik akun ini ===== -->
+    <h2 class="judul-bagian">Laporan Saya (<span id="jumlah-laporan-saya">0</span>)</h2>  <!-- UBAH -->
+    <section class="grid-laporan" id="laporan-saya">                <!-- UBAH -->
+      <p class="kosong">Memuat laporan...</p>
     </section>
   </main>
 
+  <script type="module" src="js/ui/profil.js"></script>  <!-- BARU -->
 </body>
 </html>
