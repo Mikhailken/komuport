@@ -5,7 +5,8 @@ import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 import {
   doc, setDoc, getDoc, serverTimestamp
@@ -64,4 +65,36 @@ export function pesanError(err) {
     "profil-tidak-ada": "Data akun tidak ditemukan."
   };
   return daftarPesan[kode] || "Terjadi kesalahan. Silakan coba lagi.";
+}
+// Pelindung halaman: wajib login, status aktif, dan (opsional) peran tertentu
+export function cekLogin(roleWajib) {
+  return new Promise((resolve) => {
+    const berhenti = onAuthStateChanged(auth, async (user) => {
+      berhenti();
+
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (!snap.exists() || snap.data().status !== "aktif") {
+        await signOut(auth);
+        window.location.href = "login.html";
+        return;
+      }
+
+      const profil = { uid: user.uid, ...snap.data() };
+
+      // Salah halaman? Kembalikan ke dashboard yang sesuai
+      if (roleWajib && profil.role !== roleWajib) {
+        window.location.href = profil.role === "admin"
+          ? "dashboardadmin.html"
+          : "dashboarduser.html";
+        return;
+      }
+
+      resolve(profil);
+    });
+  });
 }
