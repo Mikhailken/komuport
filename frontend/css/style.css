@@ -576,3 +576,9 @@ a:hover { text-decoration: underline; }
 .pesan-error  { color: #c0392b; }
 .pesan-sukses { color: #2e7d32; }
 .pesan-info   { color: var(--teks-pudar); }
+/* ===== 32. Pesan daftar kosong ===== */
+.kosong {
+  text-align: center;
+  color: var(--teks-pudar);
+  padding: 32px 0;
+}
