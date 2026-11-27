@@ -16,7 +16,7 @@
         <a href="dashboarduser.html">Dashboard</a>
         <a href="buat-laporan.html" class="aktif">Buat Laporan</a>
         <a href="profil.html">Profil</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>  <!-- UBAH -->
       </nav>
     </div>
   </header>
@@ -55,14 +55,14 @@
 
       <!-- ===== KOLOM KANAN: foto ===== -->
       <div class="form-kolom">
-        <label for="foto">Foto</label>
-        <!-- Kotak putus-putus ini adalah label untuk input file.
-             Kalau diklik, jendela pilih foto akan terbuka. -->
+        <label for="foto">Foto (opsional)</label>  <!-- UBAH -->
         <label for="foto" class="kotak-upload">
-          <span>Klik untuk upload foto</span>
-          <small>JPG atau PNG, maks. 5 MB</small>
+          <img id="pratinjau" class="pratinjau" alt="Pratinjau foto" hidden>  <!-- BARU -->
+          <span id="teks-upload">Klik untuk upload foto</span>                <!-- UBAH: tambah id -->
+          <small>Dari kamera atau galeri</small>                            <!-- UBAH -->
         </label>
-        <input type="file" id="foto" name="foto" accept="image/png, image/jpeg" class="input-tersembunyi">
+        <!-- UBAH: accept="image/*" supaya HP menawarkan kamera & galeri -->
+        <input type="file" id="foto" name="foto" accept="image/*" class="input-tersembunyi">
       </div>
 
       <!-- ===== TOMBOL ===== -->
@@ -70,9 +70,11 @@
         <button type="submit" class="tombol">Kirim Laporan</button>
         <a href="dashboarduser.html" class="tombol-teks">Batal</a>
       </div>
+      <p id="pesan" class="pesan"></p>  <!-- BARU -->
 
     </form>
   </main>
 
+  <script type="module" src="js/ui/buat-laporan.js"></script>  <!-- BARU -->
 </body>
 </html>
