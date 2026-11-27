@@ -566,3 +566,13 @@ a:hover { text-decoration: underline; }
 @media (min-width: 768px) {
   .profil-kartu { grid-template-columns: repeat(3, 1fr); padding: 24px 28px; }
 }
+/* ===== 31. Pesan form ===== */
+.pesan {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  min-height: 1.2em;
+}
+.pesan-error  { color: #c0392b; }
+.pesan-sukses { color: #2e7d32; }
+.pesan-info   { color: var(--teks-pudar); }
