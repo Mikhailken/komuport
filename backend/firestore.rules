@@ -54,10 +54,10 @@ service cloud.firestore {
       allow read: if isAktif();
 
       // Warga aktif boleh membuat laporan atas namanya sendiri,
-      // dan status awal wajib "Dilaporkan"
+      // dan status awal wajib "Belum Selesai"
       allow create: if isAktif()
         && request.resource.data.pelaporUid == request.auth.uid
-        && request.resource.data.status == 'Dilaporkan';
+        && request.resource.data.status == 'Belum Selesai';
 
       // Ubah status & hapus laporan: hanya admin
       allow update, delete: if isAdmin();
