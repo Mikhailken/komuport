@@ -16,7 +16,7 @@
         <a href="dashboarduser.html" class="aktif">Dashboard</a>
         <a href="buat-laporan.html">Buat Laporan</a>
         <a href="profil.html">Profil</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>  <!-- UBAH -->
       </nav>
     </div>
   </header>
@@ -24,13 +24,14 @@
   <main class="container">
     <a href="dashboarduser.html" class="link-kembali">← Kembali ke Dashboard</a>
 
+    <!-- Isi diisi otomatis oleh js/ui/detail-user.js berdasarkan ?id= di alamat -->
     <div class="detail">
 
       <!-- ===== KOLOM KIRI: judul + foto ===== -->
       <section class="detail-utama">
-        <h1>Anjing hilang</h1>
-        <p class="detail-meta">Tanggal 1 November 2026 · Pelapor: Andi · Utara 1 No. 12</p>
-        <div class="detail-foto"></div>
+        <h1 id="judul-laporan">Memuat...</h1>                 <!-- UBAH -->
+        <p class="detail-meta" id="meta-laporan"></p>         <!-- UBAH -->
+        <div class="detail-foto" id="foto-laporan"></div>     <!-- UBAH -->
       </section>
 
       <!-- ===== KOLOM KANAN: informasi + komentar ===== -->
@@ -38,36 +39,29 @@
 
         <div class="info-blok">
           <p class="info-label">Status</p>
-          <span class="badge badge-belum">Belum Selesai</span>
+          <span class="badge" id="status-laporan"></span>       <!-- UBAH -->
         </div>
 
         <div class="info-blok">
           <p class="info-label">Kategori</p>
-          <p>Hewan Hilang</p>
+          <p id="kategori-laporan"></p>                         <!-- UBAH -->
         </div>
 
         <div class="info-blok">
           <p class="info-label">Blok / Area</p>
-          <p>Utara 1</p>
+          <p id="area-laporan"></p>                             <!-- UBAH -->
         </div>
 
         <div class="info-blok">
           <p class="info-label">Deskripsi</p>
-          <p>Anjing peliharaan hilang di sekitar Blok A. Terakhir terlihat pada pagi hari.</p>
+          <p id="deskripsi-laporan"></p>                        <!-- UBAH -->
         </div>
 
         <div class="info-blok">
           <p class="info-label">Komentar</p>
 
-          <!-- Daftar komentar (contoh statis, nanti dari Firestore) -->
-          <div class="komentar">
-            <p class="komentar-penulis">Budi · Utara 2 No. 5</p>
-            <p>Sepertinya saya melihat anjing ini di Blok B</p>
-          </div>
-          <div class="komentar">
-            <p class="komentar-penulis">Andi · Utara 1 No. 12</p>
-            <p>Saya akan coba bantu mencari.</p>
-          </div>
+          <!-- UBAH: wadah komentar real-time dari subkoleksi laporan/{id}/komentar -->
+          <div id="daftar-komentar"></div>
 
           <!-- Form tulis komentar -->
           <form id="form-komentar" class="form-komentar">
@@ -80,5 +74,6 @@
     </div>
   </main>
 
+  <script type="module" src="js/ui/detail-user.js"></script>  <!-- BARU -->
 </body>
 </html>

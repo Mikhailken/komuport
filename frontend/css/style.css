@@ -600,3 +600,26 @@ a:hover { text-decoration: underline; }
 .grid-laporan .kosong {
   grid-column: 1 / -1;
 }
+/* ===== 35. Foto detail & komentar kosong ===== */
+.detail-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius);
+}
+.komentar-kosong {
+  color: var(--teks-pudar);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+/* ===== 36. Kotak foto detail saat berisi foto asli ===== */
+.detail-foto:has(img) {
+  background: var(--abu-latar);   /* latar abu polos, bukan ilustrasi */
+  height: auto;
+}
+.detail-foto:has(img) img {
+  height: auto;
+  max-height: 520px;              /* foto potret tidak terlalu panjang */
+  margin: 0 auto;
+}
