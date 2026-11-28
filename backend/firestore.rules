@@ -10,7 +10,7 @@ rules_version = '2';
 // - Hanya akun berstatus "aktif" (sudah diverifikasi admin) yang bisa
 //   melihat/membuat laporan dan komentar.
 // - Hanya admin yang bisa memverifikasi akun, mengubah status laporan,
-//   dan menghapus laporan/komentar.
+//   mengunggah bukti penyelesaian, dan menghapus laporan/komentar.
 // - Akun admin dibuat manual (tidak bisa lewat halaman Register).
 // =====================================================================
 
@@ -68,6 +68,12 @@ service cloud.firestore {
         allow create: if isAktif()
           && request.resource.data.penulisUid == request.auth.uid;
         allow delete: if isAdmin();
+      }
+
+      // ---------- Bukti penyelesaian (sub-koleksi, khusus admin) ----------
+      match /penyelesaian/{buktiId} {
+        allow read: if isAktif();
+        allow write: if isAdmin();
       }
     }
   }

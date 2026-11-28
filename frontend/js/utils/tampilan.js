@@ -65,3 +65,19 @@ export function buatKartuLaporan(lap, halamanDetail) {
     kartu.append(foto, isi);
     return kartu;
   }
+  
+// Kotak "Bukti Penyelesaian" (dipakai di detail admin & detail warga)
+export function buatBlokBukti(bukti) {
+  const kotak = buat("div", "bukti");
+  if (bukti.foto) {
+    const img = buat("img", "bukti-foto");
+    img.src = bukti.foto;
+    img.alt = "Foto bukti penyelesaian";
+    kotak.append(img);
+  }
+  kotak.append(
+    buat("p", "", bukti.catatan),
+    buat("p", "bukti-meta", `Diselesaikan oleh ${bukti.adminNama} · ${formatWaktu(bukti.dibuatPada)}`)
+  );
+  return kotak;
+}

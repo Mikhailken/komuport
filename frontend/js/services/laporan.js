@@ -3,7 +3,8 @@
 // =========================================
 import { db } from "./firebase-config.js";
 import {
-  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, where
+  collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, where,
+  getDocs, writeBatch
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
 // Simpan laporan baru dengan status awal "Belum Selesai"
@@ -33,7 +34,7 @@ export function pantauSemuaLaporan(callback) {
   });
 }
 
-// Pantau satu laporan berdasarkan ID (real-time, misal saat status diubah admin)
+// Pantau satu laporan berdasarkan ID (real-time)
 export function pantauLaporan(id, callback) {
   return onSnapshot(doc(db, "laporan", id), (snap) => {
     callback(snap.exists() ? { id: snap.id, ...snap.data() } : null);
@@ -45,8 +46,29 @@ export function pantauLaporanSaya(uid, callback) {
   const q = query(collection(db, "laporan"), where("pelaporUid", "==", uid));
   return onSnapshot(q, (snap) => {
     const daftar = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    // Urutkan di browser (terbaru di atas)
     daftar.sort((a, b) => (b.dibuatPada?.seconds || 0) - (a.dibuatPada?.seconds || 0));
     callback(daftar);
   });
+}
+
+// Admin: ubah status menjadi "Belum Selesai" atau "Diproses".
+// Kalau sebelumnya "Selesai", bukti penyelesaian ikut dihapus.
+export async function ubahStatus(id, statusBaru) {
+  const batch = writeBatch(db);
+  batch.update(doc(db, "laporan", id), {
+    status: statusBaru,
+    diperbaruiPada: serverTimestamp()
+  });
+  batch.delete(doc(db, "laporan", id, "penyelesaian", "bukti"));
+  await batch.commit();
+}
+
+// Admin: hapus laporan beserta semua komentar dan buktinya
+export async function hapusLaporan(id) {
+  const batch = writeBatch(db);
+  const komentar = await getDocs(collection(db, "laporan", id, "komentar"));
+  komentar.forEach((k) => batch.delete(k.ref));
+  batch.delete(doc(db, "laporan", id, "penyelesaian", "bukti"));
+  batch.delete(doc(db, "laporan", id));
+  await batch.commit();
 }
