@@ -15,7 +15,7 @@
       <nav class="nav">
         <a href="dashboardadmin.html" class="aktif">Dashboard</a>
         <a href="verifikasi-akun.html">Verifikasi Akun</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>
       </nav>
     </div>
   </header>
@@ -23,13 +23,14 @@
   <main class="container">
     <a href="dashboardadmin.html" class="link-kembali">← Kembali ke Dashboard</a>
 
+    <!-- Isi diisi otomatis oleh js/ui/detail-admin.js berdasarkan ?id= -->
     <div class="detail">
 
-      <!-- ===== KOLOM KIRI: judul + foto ===== -->
+      <!-- ===== KOLOM KIRI: judul + foto + hapus ===== -->
       <section class="detail-utama">
-        <h1>Anjing hilang</h1>
-        <p class="detail-meta">Tanggal 1 November 2026 · Pelapor: Andi · Utara 1 No. 12</p>
-        <div class="detail-foto"></div>
+        <h1 id="judul-laporan">Memuat...</h1>
+        <p class="detail-meta" id="meta-laporan"></p>
+        <div class="detail-foto" id="foto-laporan"></div>
         <button type="button" class="tombol-hapus" id="hapus-laporan">Hapus Laporan</button>
       </section>
 
@@ -38,10 +39,10 @@
 
         <div class="info-blok">
           <p class="info-label">Status</p>
-          <span class="badge badge-belum">Belum Selesai</span>
+          <span class="badge" id="status-laporan"></span>
         </div>
 
-        <!-- Khusus admin: tombol untuk mengubah status -->
+        <!-- Khusus admin: ubah status -->
         <div class="info-blok">
           <p class="info-label">Perbarui Status</p>
           <div class="pilihan-status">
@@ -49,42 +50,53 @@
             <button type="button" class="badge badge-proses" data-status="Diproses">Diproses</button>
             <button type="button" class="badge badge-selesai" data-status="Selesai">Selesai</button>
           </div>
-          <p class="petunjuk">Klik status untuk mengubah</p>
+          <p class="petunjuk">Klik status untuk mengubah. Status "Selesai" wajib disertai bukti.</p>
+
+          <!-- Form bukti penyelesaian: muncul saat klik "Selesai" -->
+          <form id="form-bukti" class="form-bukti" hidden>
+            <label for="catatan-bukti">Catatan penyelesaian</label>
+            <textarea id="catatan-bukti" rows="3" required
+              placeholder="Contoh: Mobil sudah dipindahkan oleh pemiliknya pukul 14.00"></textarea>
+
+            <label for="foto-bukti" class="kotak-upload">
+              <img id="pratinjau-bukti" class="pratinjau" alt="Pratinjau foto bukti" hidden>
+              <span id="teks-upload-bukti">Klik untuk upload foto bukti</span>
+              <small>Dari kamera atau galeri</small>
+            </label>
+            <input type="file" id="foto-bukti" accept="image/*" class="input-tersembunyi">
+
+            <div class="form-tombol">
+              <button type="submit" class="tombol">Simpan &amp; Tandai Selesai</button>
+              <button type="button" class="tombol-teks" id="batal-bukti">Batal</button>
+            </div>
+            <p id="pesan-bukti" class="pesan"></p>
+          </form>
+        </div>
+
+        <!-- Bukti penyelesaian: tampil kalau status Selesai -->
+        <div class="info-blok" id="blok-bukti" hidden>
+          <p class="info-label">Bukti Penyelesaian</p>
+          <div id="wadah-bukti"></div>
         </div>
 
         <div class="info-blok">
           <p class="info-label">Kategori</p>
-          <p>Hewan Hilang</p>
+          <p id="kategori-laporan"></p>
         </div>
 
         <div class="info-blok">
           <p class="info-label">Blok / Area</p>
-          <p>Utara 1</p>
+          <p id="area-laporan"></p>
         </div>
 
         <div class="info-blok">
           <p class="info-label">Deskripsi</p>
-          <p>Anjing peliharaan hilang di sekitar Blok A. Terakhir terlihat pada pagi hari.</p>
+          <p id="deskripsi-laporan"></p>
         </div>
 
         <div class="info-blok">
           <p class="info-label">Komentar</p>
-
-          <!-- Komentar + tombol hapus (khusus admin) -->
-          <div class="komentar">
-            <div class="komentar-atas">
-              <p class="komentar-penulis">Budi · Utara 2 No. 5</p>
-              <button type="button" class="hapus-komentar">Hapus</button>
-            </div>
-            <p>Sepertinya saya melihat anjing ini di Blok B</p>
-          </div>
-          <div class="komentar">
-            <div class="komentar-atas">
-              <p class="komentar-penulis">Andi · Utara 1 No. 12</p>
-              <button type="button" class="hapus-komentar">Hapus</button>
-            </div>
-            <p>Saya akan coba bantu mencari.</p>
-          </div>
+          <div id="daftar-komentar"></div>
 
           <form id="form-komentar" class="form-komentar">
             <input type="text" id="isi-komentar" name="isi" placeholder="Tulis komentar..." required>
@@ -96,5 +108,6 @@
     </div>
   </main>
 
+  <script type="module" src="js/ui/detail-admin.js"></script>
 </body>
 </html>

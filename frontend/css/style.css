@@ -634,3 +634,36 @@ a:hover { text-decoration: underline; }
     grid-template-columns: repeat(4, 1fr);
   }
 }
+/* ===== 38. Status terpilih, form bukti, dan bukti penyelesaian ===== */
+.pilihan-status .terpilih {
+  outline: 2px solid var(--teks);
+  outline-offset: 2px;
+}
+.form-bukti {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  background: var(--abu-latar);
+}
+.form-bukti[hidden],
+.info-blok[hidden] {
+  display: none;
+}
+.bukti-foto {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: var(--abu-latar);
+  margin-bottom: 8px;
+}
+.bukti-meta {
+  font-size: 0.85rem;
+  color: var(--teks-pudar);
+  margin-top: 4px;
+}
