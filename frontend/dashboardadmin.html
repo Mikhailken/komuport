@@ -15,7 +15,7 @@
       <nav class="nav">
         <a href="dashboardadmin.html" class="aktif">Dashboard</a>
         <a href="verifikasi-akun.html">Verifikasi Akun</a>
-        <a href="login.html">Logout</a>
+        <a href="login.html" id="tombol-logout">Logout</a>
       </nav>
     </div>
   </header>
@@ -29,18 +29,22 @@
       </div>
     </div>
 
-    <!-- ===== RINGKASAN JUMLAH LAPORAN ===== -->
+    <!-- ===== RINGKASAN: dihitung otomatis dari Firestore ===== -->
     <section class="statistik">
       <div class="statistik-kotak">
-        <p class="statistik-angka">25</p>
+        <p class="statistik-angka" id="stat-total">0</p>
         <p class="statistik-label">Total</p>
       </div>
       <div class="statistik-kotak">
-        <p class="statistik-angka">13</p>
+        <p class="statistik-angka" id="stat-belum">0</p>
         <p class="statistik-label">Belum Selesai</p>
       </div>
       <div class="statistik-kotak">
-        <p class="statistik-angka">12</p>
+        <p class="statistik-angka" id="stat-proses">0</p>
+        <p class="statistik-label">Diproses</p>
+      </div>
+      <div class="statistik-kotak">
+        <p class="statistik-angka" id="stat-selesai">0</p>
         <p class="statistik-label">Selesai</p>
       </div>
     </section>
@@ -48,63 +52,15 @@
     <!-- ===== KOTAK PENCARIAN ===== -->
     <div class="kotak-cari">
       <span class="ikon-cari" aria-hidden="true">⌕</span>
-      <input type="search" id="cari" placeholder="Cari laporan ..." aria-label="Cari laporan">
+      <input type="search" id="cari" placeholder="Cari judul, kategori, area, pelapor, atau status..." aria-label="Cari laporan">
     </div>
 
-    <!-- ===== DAFTAR LAPORAN (contoh statis) ===== -->
-    <section class="grid-laporan">
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">1 November 2026</p>
-          <h3>Anjing Hilang</h3>
-          <p class="kartu-lokasi">Lokasi: Blok A</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporan-admin.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">2 November 2026</p>
-          <h3>Mobil Parkir Liar</h3>
-          <p class="kartu-lokasi">Lokasi: Blok B</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporan-admin.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">3 November 2026</p>
-          <h3>Kerusakan Jalan</h3>
-          <p class="kartu-lokasi">Lokasi: Blok C</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-belum">Belum Selesai</span>
-            <a href="detail-laporan-admin.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
-      <article class="kartu">
-        <div class="kartu-foto"></div>
-        <div class="kartu-isi">
-          <p class="kartu-tanggal">4 November 2026</p>
-          <h3>Lampu Jalan Mati</h3>
-          <p class="kartu-lokasi">Lokasi: Blok C</p>
-          <div class="kartu-bawah">
-            <span class="badge badge-selesai">Selesai</span>
-            <a href="detail-laporan-admin.html">Lihat Detail →</a>
-          </div>
-        </div>
-      </article>
-
+    <!-- ===== DAFTAR LAPORAN: real-time dari Firestore ===== -->
+    <section class="grid-laporan" id="daftar-laporan">
+      <p class="kosong">Memuat laporan...</p>
     </section>
   </main>
+
+  <script type="module" src="js/ui/dashboard-admin.js"></script>
+</body>
+</html>

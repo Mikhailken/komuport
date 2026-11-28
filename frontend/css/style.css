@@ -623,3 +623,14 @@ a:hover { text-decoration: underline; }
   max-height: 520px;              /* foto potret tidak terlalu panjang */
   margin: 0 auto;
 }
+/* ===== 37. Statistik 4 kotak ===== */
+.statistik {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .statistik {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
