@@ -4,7 +4,8 @@
 import { cekLogin, keluar } from "../services/auth.js";
 import { pantauLaporan } from "../services/laporan.js";
 import { pantauKomentar, tambahKomentar } from "../services/komentar.js";
-import { buat, formatTanggal, formatWaktu, kelasBadge } from "../utils/tampilan.js";
+import { pantauBukti } from "../services/penyelesaian.js";
+import { buat, formatTanggal, formatWaktu, kelasBadge, buatBlokBukti } from "../utils/tampilan.js";
 
 const profil = await cekLogin("warga");
 
@@ -96,11 +97,20 @@ el.form.addEventListener("submit", async (e) => {
     tombol.disabled = false;
   }
 });
+// ----- Tampilkan bukti penyelesaian (real-time) -----
+const blokBukti = document.getElementById("blok-bukti");
+const wadahBukti = document.getElementById("wadah-bukti");
 
+function tampilkanBukti(bukti) {
+  wadahBukti.innerHTML = "";
+  blokBukti.hidden = !bukti;
+  if (bukti) wadahBukti.append(buatBlokBukti(bukti));
+}
 // ----- Mulai -----
 if (!id) {
   window.location.href = "dashboarduser.html";
 } else {
-  pantauLaporan(id, tampilkanLaporan);    // real-time: status berubah langsung terlihat
-  pantauKomentar(id, tampilkanKomentar);  // real-time: komentar baru langsung muncul
+  pantauLaporan(id, tampilkanLaporan);
+  pantauBukti(id, tampilkanBukti);        // BARU
+  pantauKomentar(id, tampilkanKomentar);
 }
