@@ -667,3 +667,35 @@ a:hover { text-decoration: underline; }
   color: var(--teks-pudar);
   margin-top: 4px;
 }
+/* ===== 39. Notifikasi toast ===== */
+.toast-wadah {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 320px;
+  max-width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+.toast {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  background: var(--biru-utama);
+  color: var(--putih);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  animation: toast-masuk 0.3s ease;
+  transition: opacity 0.5s;
+}
+.toast strong { font-size: 0.95rem; }
+.toast span   { font-size: 0.85rem; }
+.toast-hilang { opacity: 0; }
+@keyframes toast-masuk {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}

@@ -4,8 +4,9 @@
 import { cekLogin, keluar } from "../services/auth.js";
 import { pantauSemuaLaporan } from "../services/laporan.js";
 import { buat, formatTanggal, kelasBadge } from "../utils/tampilan.js";
+import { tampilkanToast } from "../utils/toast.js";
 
-await cekLogin("warga");
+const profil = await cekLogin("warga");   // disimpan untuk notifikasi
 
 const wadah = document.getElementById("daftar-laporan");
 const tombolFilter = document.querySelectorAll(".filter-item");
@@ -78,8 +79,26 @@ tombolFilter.forEach((tombol) => {
   });
 });
 
-// Real-time: setiap ada laporan baru/berubah, daftar diperbarui otomatis
-pantauSemuaLaporan((daftar) => {
+// Notifikasi untuk warga
+function beriNotifikasi(perubahan) {
+  perubahan.forEach((p) => {
+    // Laporan baru dari warga lain
+    if (p.jenis === "added" && p.pelaporUid !== profil.uid) {
+      tampilkanToast("Laporan baru", `${p.judul} · ${p.area}`,
+        `detail-laporanuser.html?id=${p.id}`);
+    }
+    // Status laporan milik saya berubah
+    if (p.jenis === "modified" && p.pelaporUid === profil.uid
+        && p.statusLama && p.statusLama !== p.status) {
+      tampilkanToast("Status laporan kamu berubah", `"${p.judul}" sekarang ${p.status}`,
+        `detail-laporanuser.html?id=${p.id}`);
+    }
+  });
+}
+
+// Real-time: daftar diperbarui + notifikasi
+pantauSemuaLaporan((daftar, perubahan, pertama) => {
   semuaLaporan = daftar;
   tampilkan();
+  if (!pertama) beriNotifikasi(perubahan);
 });

@@ -4,6 +4,7 @@
 import { cekLogin, keluar } from "../services/auth.js";
 import { pantauSemuaLaporan } from "../services/laporan.js";
 import { buat, buatKartuLaporan } from "../utils/tampilan.js";
+import { tampilkanToast } from "../utils/toast.js";
 
 await cekLogin("admin");
 
@@ -54,9 +55,18 @@ function tampilkan() {
 // Cari saat mengetik
 inputCari.addEventListener("input", tampilkan);
 
-// Real-time: laporan baru langsung muncul, statistik ikut berubah
-pantauSemuaLaporan((daftar) => {
+// Real-time: laporan baru langsung muncul, statistik ikut berubah, + notifikasi
+pantauSemuaLaporan((daftar, perubahan, pertama) => {
   semuaLaporan = daftar;
   hitungStatistik();
   tampilkan();
+
+  if (pertama) return;
+  perubahan
+    .filter((p) => p.jenis === "added")
+    .forEach((p) => tampilkanToast(
+      `Laporan baru dari ${p.pelaporNama}`,
+      `${p.judul} · ${p.area}`,
+      `detail-laporan-admin.html?id=${p.id}`
+    ));
 });
