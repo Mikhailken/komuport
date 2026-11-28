@@ -25,12 +25,28 @@ export async function buatLaporan(data, profil) {
   return ref.id;
 }
 
-// Pantau semua laporan secara real-time (terbaru di atas)
+// Pantau semua laporan secara real-time (terbaru di atas).
+// callback(daftar, perubahan, pertama):
+//   perubahan = apa saja yang berubah (added/modified/removed) + status lamanya
+//   pertama   = true saat data pertama kali dimuat (bukan notifikasi)
 export function pantauSemuaLaporan(callback) {
   const q = query(collection(db, "laporan"), orderBy("dibuatPada", "desc"));
+  const statusSebelum = new Map();
+  let pertama = true;
+
   return onSnapshot(q, (snap) => {
     const daftar = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-    callback(daftar);
+
+    const perubahan = snap.docChanges().map((c) => ({
+      jenis: c.type,
+      statusLama: statusSebelum.get(c.doc.id),
+      id: c.doc.id,
+      ...c.doc.data()
+    }));
+
+    daftar.forEach((l) => statusSebelum.set(l.id, l.status));
+    callback(daftar, perubahan, pertama);
+    pertama = false;
   });
 }
 
